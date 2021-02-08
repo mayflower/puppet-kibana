@@ -34,28 +34,28 @@ class kibana (
   Kibana::Status $status,
 ) {
 
-  contain ::kibana::install
-  contain ::kibana::config
-  contain ::kibana::service
+  contain kibana::install
+  contain kibana::config
+  contain kibana::service
 
   if $manage_repo {
-    contain ::elastic_stack::repo
+    contain elastic_stack::repo
 
-    Class['::elastic_stack::repo']
-    -> Class['::kibana::install']
+    Class['elastic_stack::repo']
+    -> Class['kibana::install']
   }
 
   # Catch absent values, otherwise default to present/installed ordering
   case $ensure {
     'absent': {
-      Class['::kibana::service']
-      -> Class['::kibana::config']
-      -> Class['::kibana::install']
+      Class['kibana::service']
+      -> Class['kibana::config']
+      -> Class['kibana::install']
     }
     default: {
-      Class['::kibana::install']
-      -> Class['::kibana::config']
-      ~> Class['::kibana::service']
+      Class['kibana::install']
+      -> Class['kibana::config']
+      ~> Class['kibana::service']
     }
   }
 }
