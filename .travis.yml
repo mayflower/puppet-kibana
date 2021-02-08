@@ -26,6 +26,12 @@ jobs:
    - env:
      - TASK=test
      - PUPPET_VERSION='~> 5.0'
+   - env:
+     - TASK=test
+     - PUPPET_VERSION='~> 6.0'
+   - env:
+     - TASK=test
+     - PUPPET_VERSION='~> 7.0'
    - stage: acceptance
      env:
      - TASK=beaker:amazonlinux-x64
